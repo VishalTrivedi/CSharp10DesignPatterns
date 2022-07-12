@@ -1,4 +1,6 @@
-﻿namespace Prototype
+﻿using Newtonsoft.Json;
+
+namespace Prototype
 {
 	/// <summary>
 	/// Prototype
@@ -7,7 +9,7 @@
 	{
 		public abstract string Name { get; set; }
 
-		public abstract Person Clone();
+		public abstract Person Clone(bool deepClone);
 	}
 
 	/// <summary>
@@ -21,8 +23,13 @@
 		{
 			Name = name;
 		}
-		public override Person Clone()
+		public override Person Clone(bool deepClone = false)
 		{
+			if (deepClone)
+			{
+				string objectAsJson = JsonConvert.SerializeObject(this);
+				return JsonConvert.DeserializeObject<Manager>(objectAsJson);
+			}
 			return (Person)MemberwiseClone();
 		}
 	}
@@ -41,8 +48,13 @@
 			Name = name;
 			Manager = manager;
 		}
-		public override Person Clone()
+		public override Person Clone(bool deepClone = false)
 		{
+			if (deepClone)
+			{
+				string objectAsJson = JsonConvert.SerializeObject(this);
+				return JsonConvert.DeserializeObject<Employee>(objectAsJson);
+			}
 			return (Person)MemberwiseClone();
 		}
 	}

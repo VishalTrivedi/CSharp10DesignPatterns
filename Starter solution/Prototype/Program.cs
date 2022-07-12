@@ -10,7 +10,7 @@ Console.WriteLine($"Manager was cloned: {managerClone.Name}");
 // Both the following lines should return the same result
 //var employee = new Employee("Kevin", manager);
 var employee = new Employee("Kevin", managerClone);
-var employeeClone = (Employee)employee.Clone();
+var employeeClone = (Employee)employee.Clone(true);
 Console.WriteLine($"Employee was cloned: {employee.Name}," +
 	$" with manager {employeeClone.Manager.Name}");
 
